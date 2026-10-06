@@ -5,7 +5,7 @@ import { userMessage } from '../shell-context';
 import { loader } from '../ui/load';
 import { PAGE_STYLES } from '../ui/styles';
 import { PlatformApi } from './platform-api';
-import { formatCop } from './rules';
+import { barberCap, formatCop } from './rules';
 import { SectionsComponent } from './sections.component';
 import type { SubscriptionPlan } from './types';
 
@@ -34,7 +34,7 @@ import type { SubscriptionPlan } from './types';
                 <div>
                   <h2>{{ plan.name }}</h2>
                   <p class="gold">{{ money(plan.priceCents) }} al mes</p>
-                  <p class="muted">{{ plan.maxBarbers >= 999 ? 'Barberos ilimitados' : 'Hasta ' + plan.maxBarbers + ' barberos' }}</p>
+                  <p class="muted">{{ cap(plan.maxBarbers) }}</p>
                 </div>
                 <span class="badge" [class.ACTIVE]="plan.isActive" [class.off]="!plan.isActive">{{ plan.isActive ? 'Activo' : 'Inactivo' }}</span>
               </div>
@@ -56,6 +56,7 @@ import type { SubscriptionPlan } from './types';
 export class PlansPageComponent {
   private readonly api = inject(PlatformApi);
   readonly money = formatCop;
+  readonly cap = barberCap;
   readonly busy = signal(false);
   readonly actionError = signal('');
   readonly list = loader(() => this.api.listPlans(), (p) => p.data.length === 0);
