@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { allowedMoves, formatCop, pesosToCents, validatePlan } from './rules';
+import { allowedMoves, barberCap, formatCop, pesosToCents, validatePlan } from './rules';
 
 describe('lifecycle', () => {
   it('offers only the transitions of the contract', () => {
@@ -40,5 +40,13 @@ describe('plan form', () => {
 
   it('keeps the name within the 50 characters of the column', () => {
     expect(validatePlan({ name: 'x'.repeat(51), pesos: '1', maxBarbers: '1' }).errors.name).toBeDefined();
+  });
+});
+
+describe('barber cap', () => {
+  it('speaks of one barber, several, or unlimited', () => {
+    expect(barberCap(1)).toBe('Hasta 1 barbero');
+    expect(barberCap(6)).toBe('Hasta 6 barberos');
+    expect(barberCap(999)).toBe('Barberos ilimitados');
   });
 });

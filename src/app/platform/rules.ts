@@ -68,3 +68,9 @@ export function validatePlan(form: PlanForm): { errors: Partial<Record<keyof Pla
 export function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('es-CO', { day: 'numeric', month: 'short', year: 'numeric' });
 }
+
+/** "Hasta 1 barbero", "Hasta 6 barberos", or unlimited for 999 (the seed's convention). */
+export function barberCap(maxBarbers: number): string {
+  if (maxBarbers >= 999) return 'Barberos ilimitados';
+  return maxBarbers === 1 ? 'Hasta 1 barbero' : `Hasta ${maxBarbers} barberos`;
+}
