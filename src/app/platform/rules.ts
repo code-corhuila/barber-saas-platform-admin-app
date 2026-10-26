@@ -1,4 +1,4 @@
-import type { BarbershopStatus, PlanRequest } from './types';
+import type { BarbershopStatus, Payment, PlanRequest } from './types';
 
 /**
  * The barbershop lifecycle of `platform-admin-service.yaml`: barbershop-api enforces it (409), the
@@ -65,6 +65,10 @@ export function validatePlan(form: PlanForm): { errors: Partial<Record<keyof Pla
 }
 
 /** "2026-12-04T15:00:00Z" → "4 dic 2026", in the phone's time zone. */
+export const PAYMENT_LABEL: Record<Payment['status'], string> = {
+  PENDING: 'Pendiente', APPROVED: 'Aprobado', DECLINED: 'Rechazado', VOIDED: 'Anulado', ERROR: 'Con error',
+};
+
 export function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('es-CO', { day: 'numeric', month: 'short', year: 'numeric' });
 }
