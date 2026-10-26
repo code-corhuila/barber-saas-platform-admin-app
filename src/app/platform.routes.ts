@@ -14,6 +14,8 @@ export const routes: Routes = [
       import('./platform/plans-page.component').then((m) => m.PlansPageComponent) },
   { path: 'plans/new', title: 'Nuevo plan', loadComponent: () =>
       import('./platform/plan-form-page.component').then((m) => m.PlanFormPageComponent) },
+  { path: 'payments', title: 'Pagos', loadComponent: () =>
+      import('./platform/payments-page.component').then((m) => m.PaymentsPageComponent) },
   { path: 'plans/:id', title: 'Editar plan', loadComponent: () =>
       import('./platform/plan-form-page.component').then((m) => m.PlanFormPageComponent) },
 ];
