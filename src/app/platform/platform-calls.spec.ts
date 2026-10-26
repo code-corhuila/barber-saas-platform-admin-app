@@ -55,4 +55,11 @@ describe('platform-admin calls', () => {
     expect(http.get).toHaveBeenCalledWith('/api/v1/platform/barbershops/shop-1/trial');
     expect(http.delete).toHaveBeenCalledWith('/api/v1/platform/plans/plan-1');
   });
+
+  it('lists every plan payment for the SUPER_ADMIN (HU-SADMIN-003)', async () => {
+    const { http, calls } = fakeHttp();
+    await calls.listPayments();
+    expect(http.get.mock.calls[0][0]).toBe('/api/v1/payments');
+    expect(params(http.get.mock.calls[0])).toEqual({ limit: 100 });
+  });
 });

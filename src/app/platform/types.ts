@@ -22,6 +22,19 @@ export interface PlanRequest {
   featuresJson?: string | null;
 }
 
+/** A plan payment (platform-admin-service.yaml 1.4.0, ADR-017). */
+export interface Payment {
+  id: string;
+  barbershopId: string;
+  planId: string;
+  planName: string;
+  reference: string;
+  amountCents: number;
+  status: 'PENDING' | 'APPROVED' | 'DECLINED' | 'VOIDED' | 'ERROR';
+  periodEnd: string | null;
+  createdAt: string;
+}
+
 export type BarbershopStatus = 'TRIAL' | 'ACTIVE' | 'SUSPENDED' | 'CANCELLED';
 
 export interface PlatformBarbershop {
