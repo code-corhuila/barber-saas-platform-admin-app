@@ -59,3 +59,17 @@ export interface TrialStatus {
   daysRemaining: number;
   expired: boolean;
 }
+
+/** PlatformMetrics of platform-admin-service.yaml 1.6.0 (FR-023, DEC-PLAT-09). */
+export interface PlatformMetrics {
+  barbershops: number;
+  trial: number;
+  active: number;
+  suspended: number;
+  cancelled: number;
+  newThisMonth: number;
+  trialsEndingIn7Days: number;
+  revenueThisMonthCents: number;
+  paymentsThisMonth: number;
+  revenueTotalCents: number;
+}
