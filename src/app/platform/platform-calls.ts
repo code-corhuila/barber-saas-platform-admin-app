@@ -1,6 +1,6 @@
 import { Observable, firstValueFrom } from 'rxjs';
 import type {
-  BarbershopStatus, Page, Payment, PlanRequest, PlatformBarbershop, SubscriptionPlan, TrialStatus,
+  BarbershopStatus, Page, Payment, PlanRequest, PlatformBarbershop, PlatformMetrics, SubscriptionPlan, TrialStatus,
 } from './types';
 
 /** The part of HttpClient this app uses: plain params and headers, so the calls test without Angular. */
@@ -63,6 +63,11 @@ export class PlatformCalls {
 
   changeStatus(barbershopId: string, status: Exclude<BarbershopStatus, 'TRIAL'>): Promise<PlatformBarbershop> {
     return firstValueFrom(this.http.patch<PlatformBarbershop>(`${BASE}/barbershops/${id(barbershopId)}/status`, { status }));
+  }
+
+  /** The platform-wide metrics of the summary (FR-023, DEC-PLAT-09). */
+  metrics(): Promise<PlatformMetrics> {
+    return firstValueFrom(this.http.get<PlatformMetrics>(`${BASE}/metrics`));
   }
 
   /** Every plan payment, newest first (SUPER_ADMIN sees them all, HU-SADMIN-003). */

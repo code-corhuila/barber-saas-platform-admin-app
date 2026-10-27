@@ -5,7 +5,9 @@ import { Routes } from '@angular/router';
  * `SUPER_ADMIN` only (FR-025); every screen is lazy, so the shell downloads only what is opened.
  */
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'barbershops' },
+  { path: '', pathMatch: 'full', redirectTo: 'summary' },
+  { path: 'summary', title: 'Resumen', loadComponent: () =>
+      import('./platform/summary-page.component').then((m) => m.SummaryPageComponent) },
   { path: 'barbershops', title: 'Barberías', loadComponent: () =>
       import('./platform/barbershops-page.component').then((m) => m.BarbershopsPageComponent) },
   { path: 'barbershops/:id', title: 'Barbería', loadComponent: () =>
